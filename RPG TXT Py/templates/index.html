@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo RPG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo ao RPG de Inventário</h1>
+
+        {% if jogador %}
+        <div class="status">
+            <h2>Status do Jogador: {{ jogador.nome }}</h2>
+            <p>HP: {{ jogador.hp }}</p>
+            <p>Dinheiro: R$ {{ jogador.dinheiro }}</p>
+            <p>Inventário: {{ jogador.inventario | join(", ") }}</p>
+        </div>
+        {% else %}
+        <h2>Crie seu Jogador</h2>
+        <form id="formCriarJogador">
+            <input type="text" name="nome" placeholder="Nome do Jogador" required>
+            <input type="number" name="dinheiro_inicial" placeholder="Dinheiro Inicial" required>
+            <button type="submit">Criar Jogador</button>
+        </form>
+        {% endif %}
+
+        <div class="shop">
+            <h2>Itens da Loja</h2>
+            <ul id="itens-loja">
+                <li>Poção de Cura - R$ 20.00</li>
+                <li>Espada - R$ 50.00</li>
+                <li>Escudo - R$ 30.00</li>
+            </ul>
+            <input type="text" id="itemComprar" placeholder="Nome do Item">
+            <input type="number" id="quantidadeComprar" placeholder="Quantidade">
+            <button id="comprarButton">Comprar Item</button>
+        </div>
+        
+        <div>
+            <button id="sortearPromocao">Sortear Promoção</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
